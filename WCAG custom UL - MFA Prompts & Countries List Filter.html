@@ -1,56 +1,197 @@
 <!DOCTYPE html>
 <html lang='{{locale}}'>
-  <head>
-    {%- auth0:head -%}
-    {% if prompt.screen.name == 'mfa-login-options' or prompt.screen.name == 'mfa-begin-enroll-options' or prompt.screen.name == 'mfa-enroll-options' or prompt.screen.name == 'mfa-county-codes' %}
-      <style>
-        li:hover,
-        button:focus {
-            background-color: transparent!important;
-            box-shadow: 0 0 0 2px var(--transparency-focus-color)!important;
-        }
-      </style>
-    {% endif %}
-    {% if prompt.screen.name == 'mfa-country-codes' %}
-      <style>
-        .inputfilter {
-          margin-top: var(--spacing-2);
-          background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAACYktHRAD/h4/MvwAAAAl2cEFnAAABKgAAASkAUBZlMQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxMy0wNC0xMFQwNjo1OTowNy0wNzowMI5BiVEAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTMtMDQtMTBUMDY6NTk6MDctMDc6MDD/HDHtAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAABF0RVh0VGl0bGUAc2VhcmNoLWljb27Cg+x9AAACKklEQVQ4T6WUSavqQBCFK+2sII7gShFXLpUsBBHFf+1KcAQFwaWiolsnnBDn++4p0iHRqPDuByFJd/Wp6qrqVn5+IQP3+52m0ymtVis6Ho885na7KRgMUiKR4O9vmEQHgwGNx2NyOp0khCBFUXgcJo/Hg67XK8ViMcpkMjz+Dl200+nQZrMhh8PBE4gYQgDidrudvzEOm2KxyP9WsCginM1mHKEUS6VSFA6HOWI4G41GPAfx2+1GgUCAVFXVZMwovwY/lUqFPB4PiyFn+XxemzbT6/VovV6z8Ol0olwux+LPCBQFEQKIvhME2WyWbWGHFCD/VghUGVvE1rDlb6TTabbFmuVyqY2aEWgbFALeI5GINvyeUCjEtlgju+IZoRWfkS30CURoxFJUNjMEt9stf38CNjJKIFvNiMBJgTebzcZt843hcMhCELWqPBDxeJwulwtvC/3X7/e1qVfgFD0rC5tMJrUZM8Lr9VI0GmVBRDCfz6nZbHI/Sna7HXW7XZpMJtxSiBIP1lmhH9NqtaqfGKQDTmQREBnSgwfmMqfYYblc1o+2xHShtNttLgSiee4EmMEp3hDBPJzikimVSuRyuTTLJ1GwWCz4pCB3UhiL/X4/Hw50C5zjLSM+n898weCogxdRIzAGxigAdtNqtV6EC4UC+Xy+z6Kf2O/31Gg0TMK4ZBDxf4uCw+FA9XpdF0aaUOg/iQLcHbVaTb/p0Cl/FgXIJ/oYnaCqKv0DC6dltH6Ks84AAAAASUVORK5CYII=');
-          background-position: 10px 12px;
-          background-repeat: no-repeat;
-          padding-left: 40px
-        }
-      </style>
-    {% endif %}
-  </head>
-  <body class='_widget-auto-layout'>
-    {%- auth0:widget -%}
-    {% if prompt.screen.name == 'mfa-country-codes' %}
-      <script type='text/javascript'>
-        const ul = document.getElementsByTagName('ul')[0];
-        const li = ul.getElementsByTagName('li');
-        const countryFilter = document.createElement('input');
-        countryFilter.setAttribute('id','countryFilter');
-        countryFilter.setAttribute('class','input inputfilter');
-        countryFilter.setAttribute('onkeyup', 'updateList(li)');
-        countryFilter.setAttribute('placeholder','Start typing a country name...');
-        countryFilter.setAttribute('title','Enter a Country');
-        ul.before(countryFilter);
-​
-        function updateList(li) {
-          var filter, a, i, txtValue;
-          filter = countryFilter.value.toUpperCase();
-          for (i = 0; i < li.length; i++) {
-            a = li[i].getElementsByTagName('form')[0].getElementsByTagName('button')[0].getElementsByTagName('span')[1];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-              li[i].style.display = '';
-            } else {
-              li[i].style.display = 'none';
+    <head>
+        {%- auth0:head -%}
+        <style>
+            a {
+                font-weight: 300!important;
+                color: #2E5C99;
+                padding: 0 0 4px!important;
+                border-radius: 0!important;
+                border-bottom: 1px solid #2671D3;
             }
-          }
-        }
-      </script>
-    {% endif %}
-  </body>
+
+            a:hover {
+                color: #2671D3;
+            }
+
+            a:focus {
+                background-color: transparent!important;
+                outline: 1.5px solid #2671D3!important;
+                outline-offset: 4px;
+            }
+
+        {% if prompt.name == 'resetPasswordSuccess' or  prompt.name == 'resetPasswordError'  %}
+            a {
+                color: #FFFFFF!important;
+                padding-bottom: 0!important;
+                border-bottom: 0;
+            }
+
+            section > div > div > section > div {
+                transition: none!important;
+            }
+
+            section > div > div > section > div:hover,
+            section > div > div > section > div:focus {
+                background-color: #2671D3!important;
+                color: #FFFFFF;
+                transition: none!important;
+            }
+
+            section > div > div > section > div:focus {
+                background-color: #2E5C99;
+                box-shadow: none!important;
+                outline: 1.5px solid #2671D3!important;
+                outline-offset: 4px;
+            }
+        {% endif %}
+        
+            button[type=submit] {
+                border-radius: 2px!important;
+                transition: none!important;
+            }
+
+            button[type=submit]:hover,
+            button[type=submit]:focus
+            button[data-action-button-secondary=true]:hover {
+                background-color: #2671D3!important;
+                color: #FFFFFF;
+            }
+
+            button[type=submit]:focus {
+                background-color: #2E5C99;
+                box-shadow: none!important;
+                outline: 1.5px solid #2671D3!important;
+                outline-offset: 4px;
+            }
+            
+            button[data-action-button-secondary=true] {
+                background: #FFFFFF!important;
+                color: #2671D3;
+                border: 1px solid #2671D3;
+
+            }
+            
+            button[data-action-button-secondary=true]:focus {
+                box-shadow: none!important;
+                outline: 1.5px solid #2671D3!important;
+                outline-offset: 4px;
+
+            }
+
+            button[value=back-action] {
+                background-color: #FFFFFF!important;
+                color: #2E5C99!important;
+                border-bottom-width: 0!important;
+            }
+
+            button[value=back-action]:hover {
+                background-color: #EAEFF5!important;
+                box-shadow: none!important;
+                outline: 1.5px solid #2671D3!important;
+            }
+
+            button[type=submit][value=resend-code],
+            button[type=submit][value=resend-sms],
+            button[type=submit][value=resend-sms-sms],
+            button[type=submit][value=resend-voice],
+            button[type=submit][value=toggle-view],
+            button[type=submit][value=pick-authenticator],
+            button[type=submit][value=pick-authenticators] {
+                color: #2E5C99!important;
+                font-weight: 300!important;
+                padding: 0 0 4px!important;
+                border-radius: 0!important;
+                border-bottom: 1px solid #2671D3;
+            }
+
+            button[type=submit][value=resend-code]:hover,
+            button[type=submit][value=resend-sms]:hover,
+            button[type=submit][value=resend-sms-sms]:hover,
+            button[type=submit][value=resend-voice]:hover,
+            button[type=submit][value=toggle-view]:hover,
+            button[type=submit][value=pick-authenticator]:hover,
+            button[type=submit][value=pick-authenticators]:hover {
+                background-color: #FFFFFF!important;
+                color: #2671D3!important;
+            }
+
+            button[type=submit][value=resend-code]:focus,
+            button[type=submit][value=resend-sms]:focus,
+            button[type=submit][value=resend-sms-sms]:focus,
+            button[type=submit][value=resend-voice]:focus,
+            button[type=submit][value=toggle-view]:focus,
+            button[type=submit][value=pick-authenticator]:focus,
+            button[type=submit][value=pick-authenticators]:focus {
+                background-color: #FFFFFF!important;
+                outline: 1.5px solid #2671D3!important;
+                outline-offset: 4px;
+            }
+        {% if prompt.screen.name == 'mfa-login-options' or prompt.screen.name == 'mfa-begin-enroll-options' or prompt.screen.name == 'mfa-enroll-options' %}
+            button[type=submit] {
+                background: #FFFFFF!important;
+                color: #2E5C99!important;
+                border: 1px solid #2E5C99!important;
+            }
+            
+            button[type=submit]:hover {
+                background-color: #2671D3!important;
+                color: #FFFFFF!important;
+            }
+            
+            button[type=submit]:focus {
+                background-color: #2671D3!important;
+                color: #FFFFFF;
+                border: 1px solid #2671D3!important;
+                box-shadow: none!important;
+                outline: 1.5px solid #2671D3!important;
+                outline-offset: 4px;
+            }
+            
+            button[type=submit] > span:nth-of-type(1),
+            form > button[type=submit] > span:nth-of-type(3) {
+                background: #2E5C99!important;
+            }
+            
+            button[type=submit]:hover > span:nth-of-type(1),
+            button[type=submit]:focus > span:nth-of-type(1),
+            form > button[type=submit]:hover > span:nth-of-type(3),
+            form > button[type=submit]:focus > span:nth-of-type(3) {
+                background: #FFFFFF!important;
+            }
+        {% endif %}
+        {% if prompt.screen.name == 'mfa-country-codes' or prompt.screen.name == 'mfa-enroll-options' %}
+            .inputfilter {
+                margin-top: var(--spacing-2);
+                background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAVCAYAAACpF6WWAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAAACYktHRAD/h4/MvwAAAAl2cEFnAAABKgAAASkAUBZlMQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxMy0wNC0xMFQwNjo1OTowNy0wNzowMI5BiVEAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTMtMDQtMTBUMDY6NTk6MDctMDc6MDD/HDHtAAAAGXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAABF0RVh0VGl0bGUAc2VhcmNoLWljb27Cg+x9AAACKklEQVQ4T6WUSavqQBCFK+2sII7gShFXLpUsBBHFf+1KcAQFwaWiolsnnBDn++4p0iHRqPDuByFJd/Wp6qrqVn5+IQP3+52m0ymtVis6Ho885na7KRgMUiKR4O9vmEQHgwGNx2NyOp0khCBFUXgcJo/Hg67XK8ViMcpkMjz+Dl200+nQZrMhh8PBE4gYQgDidrudvzEOm2KxyP9WsCginM1mHKEUS6VSFA6HOWI4G41GPAfx2+1GgUCAVFXVZMwovwY/lUqFPB4PiyFn+XxemzbT6/VovV6z8Ol0olwux+LPCBQFEQKIvhME2WyWbWGHFCD/VghUGVvE1rDlb6TTabbFmuVyqY2aEWgbFALeI5GINvyeUCjEtlgju+IZoRWfkS30CURoxFJUNjMEt9stf38CNjJKIFvNiMBJgTebzcZt843hcMhCELWqPBDxeJwulwtvC/3X7/e1qVfgFD0rC5tMJrUZM8Lr9VI0GmVBRDCfz6nZbHI/Sna7HXW7XZpMJtxSiBIP1lmhH9NqtaqfGKQDTmQREBnSgwfmMqfYYblc1o+2xHShtNttLgSiee4EmMEp3hDBPJzikimVSuRyuTTLJ1GwWCz4pCB3UhiL/X4/Hw50C5zjLSM+n898weCogxdRIzAGxigAdtNqtV6EC4UC+Xy+z6Kf2O/31Gg0TMK4ZBDxf4uCw+FA9XpdF0aaUOg/iQLcHbVaTb/p0Cl/FgXIJ/oYnaCqKv0DC6dltH6Ks84AAAAASUVORK5CYII=');
+                background-position: 10px 12px;
+                background-repeat: no-repeat;
+                padding-left: 40px
+            }
+
+            button[type=submit] {
+                border: 0 solid #2E5C99!important;
+                border-bottom-width: 1px!important;
+            }
+            
+            form > button[type=submit] > span:nth-of-type(3) {
+                background: #2E5C99!important;
+            }
+            
+            form > button[type=submit]:hover > span:nth-of-type(3),
+            form > button[type=submit]:focus > span:nth-of-type(3) {
+                background: #FFFFFF!important;
+            }
+        {% endif %}
+        </style>
+    </head>
+    <body class='_widget-auto-layout'>
+        {%- auth0:widget -%}
+        {% if prompt.screen.name == 'mfa-country-codes' %}
+        <script type='text/javascript'>
+            const ul = document.getElementsByTagName('ul')[0]; const li = ul.getElementsByTagName('li'); const countryFilter = document.createElement('input'); countryFilter.setAttribute('id', 'countryFilter'); countryFilter.setAttribute('class', 'input inputfilter'); countryFilter.setAttribute('onkeyup', 'updateList(li)'); countryFilter.setAttribute('placeholder', 'Start typing a country name...'); countryFilter.setAttribute('title', 'Enter a Country'); ul.before(countryFilter); function updateList(li) { var filter, a, i, txtValue; filter = countryFilter.value.toUpperCase(); for (i = 0; i < li.length; i++) { a = li[i].getElementsByTagName('form')[0].getElementsByTagName('button')[0].getElementsByTagName('span')[1]; txtValue = a.textContent || a.innerText; if (txtValue.toUpperCase().indexOf(filter) > -1) { li[i].style.display = ''; } else { li[i].style.display = 'none'; } } }
+        </script>
+        {% endif %}
+    </body>
 </html>
