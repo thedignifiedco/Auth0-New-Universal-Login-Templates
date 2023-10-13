@@ -3,6 +3,10 @@
     <head>
         {%- auth0:head -%}
         <style>
+            body {
+                font-family: mylius-modern-extlig,mylius-modern-lt,Helvetica,Arial,sans-serif!important;
+            }
+
             a {
                 font-weight: 300!important;
                 color: #2E5C99;
@@ -17,8 +21,8 @@
 
             a:focus {
                 background-color: transparent!important;
-                outline: 1.5px solid #2671D3!important;
-                outline-offset: 4px;
+                outline: 2px solid #2671D3!important;
+                outline-offset: 2px;
             }
 
         {% if prompt.name == 'resetPasswordSuccess' or  prompt.name == 'resetPasswordError'  %}
@@ -42,8 +46,8 @@
             section > div > div > section > div:focus {
                 background-color: #2E5C99;
                 box-shadow: none!important;
-                outline: 1.5px solid #2671D3!important;
-                outline-offset: 4px;
+                outline: 2px solid #2671D3!important;
+                outline-offset: 2px;
             }
         {% endif %}
         
@@ -62,8 +66,8 @@
             button[type=submit]:focus {
                 background-color: #2E5C99;
                 box-shadow: none!important;
-                outline: 1.5px solid #2671D3!important;
-                outline-offset: 4px;
+                outline: 2px solid #2671D3!important;
+                outline-offset: 2px;
             }
             
             button[data-action-button-secondary=true] {
@@ -75,8 +79,8 @@
             
             button[data-action-button-secondary=true]:focus {
                 box-shadow: none!important;
-                outline: 1.5px solid #2671D3!important;
-                outline-offset: 4px;
+                outline: 2px solid #2671D3!important;
+                outline-offset: 2px;
 
             }
 
@@ -89,7 +93,7 @@
             button[value=back-action]:hover {
                 background-color: #EAEFF5!important;
                 box-shadow: none!important;
-                outline: 1.5px solid #2671D3!important;
+                outline: 2px solid #2671D3!important;
             }
 
             button[type=submit][value=resend-code],
@@ -125,14 +129,15 @@
             button[type=submit][value=pick-authenticator]:focus,
             button[type=submit][value=pick-authenticators]:focus {
                 background-color: #FFFFFF!important;
-                outline: 1.5px solid #2671D3!important;
-                outline-offset: 4px;
+                outline: 2px solid #2671D3!important;
+                outline-offset: 2px;
             }
-        {% if prompt.screen.name == 'mfa-login-options' or prompt.screen.name == 'mfa-begin-enroll-options' or prompt.screen.name == 'mfa-enroll-options' %}
+        {% if prompt.screen.name == 'mfa-login-options' or prompt.screen.name == 'mfa-begin-enroll-options' %}
             button[type=submit] {
                 background: #FFFFFF!important;
                 color: #2E5C99!important;
-                border: 1px solid #2E5C99!important;
+                border: 0 solid #2E5C99!important;
+                border-bottom-width: 1px!important;
             }
             
             button[type=submit]:hover {
@@ -143,10 +148,11 @@
             button[type=submit]:focus {
                 background-color: #2671D3!important;
                 color: #FFFFFF;
-                border: 1px solid #2671D3!important;
+                border: 0 solid #2671D3!important;
+                border-bottom-width: 1px!important;
                 box-shadow: none!important;
-                outline: 1.5px solid #2671D3!important;
-                outline-offset: 4px;
+                outline: 2px solid #2671D3!important;
+                outline-offset: 2px;
             }
             
             button[type=submit] > span:nth-of-type(1),
@@ -170,10 +176,10 @@
                 padding-left: 40px
             }
 
-            button[type=submit] {
+            /* button[type=submit] {
                 border: 0 solid #2E5C99!important;
                 border-bottom-width: 1px!important;
-            }
+            } */
             
             form > button[type=submit] > span:nth-of-type(3) {
                 background: #2E5C99!important;
