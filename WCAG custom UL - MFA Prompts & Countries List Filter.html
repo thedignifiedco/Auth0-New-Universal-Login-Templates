@@ -5,6 +5,7 @@
     {%- auth0:head -%}
     <style>
         body {
+            background-color: #FFFFFF;
             font-family: Mylius Modern,Open Sans,helvetica,arial,sans-serif!important;
         }
 
@@ -26,6 +27,151 @@
             background-color: #2E5C99!important;
             border-radius: 20px!important;
             border: 3px solid #EAEFF5!important;
+        }
+
+        .container {
+            width: 1024px;
+            margin: 0 auto;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .container {
+                width: 100%;
+            }
+        }
+
+        .login-header {
+            padding: 32px 0;
+            margin-bottom: 90px;
+            border-bottom: 1px solid #EEEEEE;
+        }
+
+        .login-logo {
+            width: 196px;
+            height: 48px;
+            background-image: url(data:image/png;base64,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);
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+        }
+
+        .login-title h3 {
+            font-size: 36px;
+            font-weight: 400;
+            line-height: 45px;
+            color: #021B41;
+            margin-bottom: 60px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .login-header {
+                margin-bottom: 30px;
+            }
+            
+            .login-logo {
+                margin: 0 auto;
+            }
+            
+            .login-title {
+                text-align: left;
+                padding: 0 40px;
+            }
+
+            .login-title h3 {
+                font-size: 24px;
+                font-weight: 400;
+                line-height: 30px;
+                text-align: center;
+                margin-bottom: 30px;
+            }
+        }
+
+        .login-wrapper {
+            position: relative;
+            display: inline-flex;
+            width: 60%;
+            justify-items: start;
+        }
+
+        .login-wrapper .login {
+            display: block;
+            height: 305px;
+            min-height: 305px;
+            justify-items: start;
+            padding: 0!important;
+        }
+
+        .login-wrapper .login header {
+            display: none;
+        }
+        
+        .login-wrapper section > div {
+            box-shadow: none!important;
+        }
+
+        .login-wrapper section > div > div {
+            display: block!important;
+        }
+
+        .login-wrapper div header + div {
+            padding: 0 4px!important;
+        }
+
+        .login-wrapper .ulp-alternate-action {
+            display: none;
+        }
+        
+        .signup-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            width: 39%;
+        }
+
+        .signup-cta {
+            max-width: 400px;
+            justify-content: center;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.15);
+        }
+        
+        .signup-wrapper h5 {
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 30px;
+            color: #021B41;
+            margin-bottom: 24px;
+        }
+        
+        .signup-wrapper p,
+        .signup-wrapper a {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 24px;
+            margin-bottom: 24px;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .login-wrapper,
+            .signup-wrapper {
+                width: 100%;
+            }
+
+            .login-wrapper {
+                border-bottom: 1px solid #EEEEEE;
+            }
+            
+            .signup-cta {
+                max-width: 100%;
+                box-shadow: none;
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            .login-wrapper div header + div {
+                    padding: 0 4px!important;
+                }
         }
 
         form .input-wrapper {
@@ -78,15 +224,14 @@
         a {
             color: #2E5C99;
             font-weight: 300!important;
-            letter-spacing: 2px;
-            text-transform: uppercase;
             padding: 0 0 4px!important;
             border-radius: 0!important;
-            border-bottom: 1px solid #2671D3;
+            border-bottom: 1px solid #2E5C99;
         }
 
         a:hover {
             color: #2671D3;
+            border-bottom: 1px solid #2671D3;
         }
 
         a:focus {
@@ -418,13 +563,44 @@
 </head>
 
 <body class='_widget-auto-layout'>
-    {%- auth0:widget -%}
+    {% if prompt.name == "login" %}
+        <div class="login-header">
+            <div class="container">
+                <div class="login-logo"></div>
+            </div>
+        </div>
+        <div class="login-title">
+            <div class="container">
+                <h3>Login to your British Airways account</h3>
+            </div>
+        </div>
+        <div class="container">
+            <div class="login-wrapper">
+                {%- auth0:widget -%}
+            </div>
+            <div class="signup-wrapper">
+                <div class="signup-cta">
+                    <h5>Create an account</h5>
+                    <p id="cta-text">Book flights quicker, pay with Avios and earn rewards as an Executive Club member.</p>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        {%- auth0:widget -%}
+    {% endif %}
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
     <script type='text/javascript'>
         // Disable default browser form validation, for accesibility reasons
         $(document).ready(function () {
             $("form[data-form-primary='true']").attr('novalidate', '');
         });
+
+        // Clone Signup Link for Login page
+        let signupLink = document.querySelector('._alternate-action a');
+        let clonedSignupLink = signupLink.cloneNode(true);
+        clonedSignupLink.id = 'cta-link';
+        let signupText = document.querySelector('#cta-text')
+        signupText.insertAdjacentElement("afterend", clonedSignupLink);
     </script>
     {% if prompt.screen.name == 'mfa-country-codes' %}
     <script type='text/javascript'>
