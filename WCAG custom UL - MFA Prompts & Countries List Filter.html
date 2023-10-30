@@ -147,7 +147,7 @@
         .signup-wrapper p,
         .signup-wrapper a {
             font-size: 16px;
-            font-weight: 300;
+            font-weight: 400;
             line-height: 24px;
             margin-bottom: 24px;
         }
@@ -200,7 +200,8 @@
             border: none!important;
         }
 
-        .ulp-input-error-icon, [id^=ulp-container-] .ulp-field.ulp-error .ulp-error-info:before {
+        .ulp-input-error-icon,
+        [id^=ulp-container-] .ulp-field.ulp-error .ulp-error-info:before {
             display: flex;
             height: 24px!important;
             width: 24px!important;
@@ -220,27 +221,63 @@
         .password:has(> input[aria-invalid=true]) {
             border-color: #CC0066!important;
         }
-
+        
+        .input:autofill,
+        .input:-webkit-autofill {
+            border-color: #2671D3!important;
+        }
+        
+        {% if prompt.name=='reset-password' %}
+        
+        .password:has(> input:invalid) {
+            border-color: #CC0066!important;
+        }
+        
+        .password:has(> input:valid) {
+            border-color: #CCCCCC!important;
+        }
+        
+        .password:has(> input:focus),
+        .password:has(> input:focus-within) {
+            border-color: #2671D3!important;
+        }
+        
+        input:invalid + div[data-dynamic-label-for=password-reset],
+        input:invalid + div[data-dynamic-label-for=re-enter-password] {
+            color: #CC0066!important
+        }
+        
+        input:focus-within + div[data-dynamic-label-for=password-reset],
+        input:focus-within + div[data-dynamic-label-for=re-enter-password] {
+            color: #2671D3!important
+        }
+        
+        .password:focus-within:has(> .ulp-button-icon:focus) {
+            box-shadow: none!important;
+        }
+        
+        {% endif %}
+        
         a {
             color: #2E5C99;
-            font-weight: 300!important;
+            font-weight: 400!important;
             padding: 0 0 4px!important;
             border-radius: 0!important;
             border-bottom: 1px solid #2E5C99;
         }
 
+        a:focus {
+            background-color: transparent!important;
+            color: #2E5C99!important;
+            outline: 2px solid #2671D3!important;
+            outline-offset: 2px;
+        }
+        
         a:hover {
             color: #2671D3;
             border-bottom: 1px solid #2671D3;
         }
-
-        a:focus {
-            background-color: transparent!important;
-            color: #2E5C99!important;
-            outline: 2px solid #2E5C99!important;
-            outline-offset: 2px;
-        }
-
+        
         {% if prompt.name=='resetPasswordSuccess' or prompt.name=='resetPasswordError' %}
 
         a {
@@ -267,9 +304,9 @@
             outline-offset: 2px;
         }
 
-            {% endif %}
+        {% endif %}
 
-            {% if prompt.name=='mfa' %}
+        {% if prompt.name=='mfa' %}
 
         form>div>a {
             padding-bottom: 0!important;
@@ -277,17 +314,17 @@
             border-radius: 2px!important;
         }
 
+        form>div>a>div:focus {
+            background-color: #FFFFFF!important;
+            color: #2E5C99!important;
+            box-shadow: none!important;
+        }
+        
         form>div>a>div:hover {
             background-color: #FFFFFF!important;
             color: #2671D3!important;
             box-shadow: none!important;
             border: 1px solid #2671D3!important;
-        }
-
-        form>div>a>div:focus {
-            background-color: #FFFFFF!important;
-            color: #2E5C99!important;
-            box-shadow: none!important;
         }
 
         {% endif %}
@@ -307,20 +344,20 @@
         label[for=voice] {
             color: #2E5C99!important;
         }
-
+        
+        label[for=sms]:focus,
+        label[for=voice]:focus {
+            background-color: #FFFFFF!important;
+            color: #2E5C99!important;
+            box-shadow: none!important;
+        }
+        
         label[for=sms]:hover,
         label[for=voice]:hover {
             background-color: #2671D3!important;
             color: #FFFFFF!important;
             box-shadow: none!important;
             border: 1px solid #2671D3!important;
-        }
-
-        label[for=sms]:focus,
-        label[for=voice]:focus {
-            background-color: #FFFFFF!important;
-            color: #2E5C99!important;
-            box-shadow: none!important;
         }
 
         {% endif %}
@@ -332,13 +369,7 @@
             border-radius: 2px!important;
             transition: none!important;
         }
-
-        button[type=submit]:hover,
-        button[type=submit]:focus button[data-action-button-secondary=true]:hover {
-            background-color: #2671D3!important;
-            color: #FFFFFF!important;
-        }
-
+        
         button[type=submit]:focus {
             background-color: #2E5C99;
             color: #FFFFFF!important;
@@ -346,7 +377,15 @@
             outline: 2px solid #2671D3!important;
             outline-offset: 2px;
         }
+        
+        button[type=submit]:hover,
+        button[type=submit]:focus button[data-action-button-secondary=true]:hover,
+        button[type=button]:hover {
+            background-color: #2671D3!important;
+            color: #FFFFFF!important;
+        }
 
+        button[type=button],
         button[data-action-button-secondary=true],
         button[value=decline],
         button[value=cancel],
@@ -354,12 +393,41 @@
             background: #FFFFFF!important;
             color: #2671D3;
             border: 1px solid #2671D3;
+            transition: none!important;
         }
 
+        button[type=button]:focus,
         button[data-action-button-secondary=true]:focus {
             box-shadow: none!important;
             outline: 2px solid #2671D3!important;
             outline-offset: 2px;
+        }
+
+        button[type=button][data-action=toggle] {
+            background: #FFFFFF!important;
+            border: 0;
+            border-top-right-radius: 8px!important;
+            border-bottom-right-radius: 8px!important;
+        }
+        
+        button[type=button][data-action=toggle]:focus {
+            background: #FFFFFF!important;
+            outline: 2px solid #2671D3!important;
+            outline-offset: 2px;
+        }
+        
+        button[type=button][data-action=toggle]:hover {
+            background: #EAEFF5!important;
+            border: 0;
+        }
+        
+        button[type=button][data-action=toggle]:focus span.password {
+            background-color: #2E5C99!important;
+            border: 0;
+        }
+        
+        button[type=button][data-action=toggle]:hover span.password {
+            background-color: #2E5C99!important;
         }
 
         button[value=re-send-email] {
@@ -381,18 +449,7 @@
             border-radius: 0!important;
             border-bottom: 1px solid #2671D3;
         }
-
-        button[type=submit][value=resend-code]:hover,
-        button[type=submit][value=resend-sms]:hover,
-        button[type=submit][value=resend-sms-sms]:hover,
-        button[type=submit][value=resend-voice]:hover,
-        button[type=submit][value=toggle-view]:hover,
-        button[type=submit][value=pick-authenticator]:hover,
-        button[type=submit][value=pick-authenticators]:hover {
-            background-color: #FFFFFF!important;
-            color: #2671D3!important;
-        }
-
+        
         button[type=submit][value=resend-code]:focus,
         button[type=submit][value=resend-sms]:focus,
         button[type=submit][value=resend-sms-sms]:focus,
@@ -406,6 +463,17 @@
             outline: 2px solid #2671D3!important;
             outline-offset: 2px;
         }
+        
+        button[type=submit][value=resend-code]:hover,
+        button[type=submit][value=resend-sms]:hover,
+        button[type=submit][value=resend-sms-sms]:hover,
+        button[type=submit][value=resend-voice]:hover,
+        button[type=submit][value=toggle-view]:hover,
+        button[type=submit][value=pick-authenticator]:hover,
+        button[type=submit][value=pick-authenticators]:hover {
+            background-color: #FFFFFF!important;
+            color: #2671D3!important;
+        }
 
         {% if prompt.screen.name=='mfa-login-options' or prompt.screen.name=='mfa-begin-enroll-options' %}
 
@@ -415,32 +483,30 @@
             border: 1px solid #2E5C99!important;
             margin-bottom: 16px!important;
         }
-
+        
+        button[type=submit]:focus {
+            background-color: #FFFFFF!important;
+            color: #2E5C99!important;
+            border: 1px solid #2E5C99!important;
+            box-shadow: none!important;
+            outline: 2px solid #2671D3!important;
+            outline-offset: 2px;
+        }
+        
         button[type=submit]:hover {
             background-color: #2671D3!important;
             color: #FFFFFF!important;
             border: 1px solid #2671D3!important;
         }
 
-        button[type=submit]:focus {
-            background-color: #2671D3!important;
-            color: #FFFFFF!important;
-            border: 1px solid #2671D3!important;
-            box-shadow: none!important;
-            outline: 2px solid #2671D3!important;
-            outline-offset: 2px;
-        }
-
-        button[type=submit]>span:nth-of-type(1),
         button[type=submit][value=back-action]>span:nth-of-type(1),
-        form>button[type=submit]>span:nth-of-type(3) {
+        button[type=submit]>span:nth-of-type(1),
+        button[type=submit]>span:nth-of-type(3) {
             background: #2E5C99!important;
         }
 
         button[type=submit]:hover>span:nth-of-type(1),
-        button[type=submit]:focus>span:nth-of-type(1),
-        form>button[type=submit]:hover>span:nth-of-type(3),
-        form>button[type=submit]:focus>span:nth-of-type(3) {
+        button[type=submit]:hover>span:nth-of-type(3) {
             background: #FFFFFF!important;
         }
 
@@ -460,14 +526,68 @@
 
         {% endif %}
 
-        {% if prompt.screen.name=='mfa-sms-enrollment' %}
+        {% if prompt.screen.name=='mfa-recovery-code-enrollment' or prompt.screen.name=='mfa-otp-enrollment-code' %}
 
-        form>button[type=submit]:focus {
+        button[type=button]:focus {
+            background-color: #FFFFFF!important;
+            color: #2E5C99!important;
+            border: 1px solid #2E5C99!important;
+            box-shadow: none!important;
+            outline: 2px solid #2671D3!important;
+            outline-offset: 2px;
+        }
+        
+        button[type=button]:hover {
+            background-color: #2671D3!important;
             color: #FFFFFF!important;
+            border: 1px solid #2671D3!important;
+        }
+        
+        input[type=checkbox]:focus+label[for=saved] {
+            background-color: transparent!important;
+            box-shadow: none!important;
+            outline: 2px solid #2671D3!important;
+            outline-offset: 2px;
+        }
+        
+        {% endif %}
+
+        {% if prompt.screen.name=='mfa-otp-challenge' or prompt.screen.name=='mfa-webauthn-platform-challenge' %}
+
+        input[type=checkbox]:focus+label[for=rememberBrowser] {
+            background-color: transparent!important;
+            box-shadow: none!important;
+            outline: 2px solid #2671D3!important;
+            outline-offset: 2px;
         }
 
-        form>button[type=submit]:hover>span:nth-of-type(3),
-        form>button[type=submit]:focus>span:nth-of-type(3) {
+        {% endif %}
+
+        {% if prompt.screen.name=='mfa-sms-enrollment' %}
+
+        button[type=submit][value=pick-country-code] {
+            background: #FFFFFF!important;
+            color: #2E5C99!important;
+            border: 1px solid #2E5C99!important;
+            margin-bottom: 16px!important;
+        }
+        
+        button[type=submit][value=pick-country-code]:focus {
+            background-color: #FFFFFF!important;
+            color: #2E5C99!important;
+            border: 1px solid #2E5C99!important;
+            box-shadow: none!important;
+            outline: 2px solid #2671D3!important;
+            outline-offset: 2px;
+        }
+        
+        button[type=submit][value=pick-country-code]:hover {
+            background-color: #2671D3!important;
+            color: #FFFFFF!important;
+            border: 1px solid #2671D3!important;
+        }
+        
+        button[type=submit][value=pick-country-code]:hover>span:nth-of-type(3) {
             background: #FFFFFF!important;
         }
 
@@ -522,6 +642,12 @@
             margin-top: 0!important;
         }
         
+        @media (max-width: 600px) {
+            .input {
+                margin-top: 20px!important;
+            }
+        }
+        
         .input:focus {
             border-color: #2E5C99!important;
             box-shadow: none!important;
@@ -532,8 +658,107 @@
         .input + ul {
             height: 360px!important;
             overflow-y: scroll;
-            padding-right: 8px!important;
+            padding: 6px!important;
             margin-top: 10px!important;
+        }
+        
+        button[type=submit]._link-selection-action {
+            outline: 2px solid transparent!important;
+            outline-offset: 2px;
+        }
+        
+        button[type=submit]._link-selection-action:focus {
+            background-color: #FFFFFF!important;
+            color: #2E5C99!important;
+            border: 1px solid #2E5C99!important;
+            box-shadow: none!important;
+            outline: 2px solid #2671D3!important;
+            outline-offset: 2px;
+        }
+        
+        button[type=submit]._link-selection-action:hover {
+            background-color: #2671D3!important;
+            color: #FFFFFF!important;
+            border: 1px solid #2671D3!important;
+        }
+        
+        button[type=submit]._link-selection-action:focus>span:nth-of-type(3) {
+            background: #2E5C99!important;
+        }
+        
+        button[type=submit]._link-selection-action:hover>span:nth-of-type(3) {
+            background: #FFFFFF!important;
+        }
+        
+        {% endif %}
+        
+        {% if prompt.screen.name=='mfa-sms-challenge' %}
+        
+        ._prompt-box-outer div:has(> .ulp-authenticator-selector-text):focus,
+        ._prompt-box-outer div:has(> .ulp-authenticator-selector-text):focus-within {
+            background-color: #FFFFFF!important;
+            border-color: #CCCCCC!important;
+            box-shadow: none!important;
+        }
+        
+        .ulp-authenticator-selector-text {
+            cursor: default!important;
+        }
+
+        {% endif %}
+
+        {% if prompt.screen.name=='mfa-webauthn-platform-enrollment' %}
+
+        button[type=submit][value=snooze-enrollment] {
+            background: #FFFFFF!important;
+            color: #2E5C99!important;
+            border: 1px solid #2E5C99!important;
+            margin-bottom: 16px!important;
+        }
+        
+        button[type=submit][value=snooze-enrollment]:focus {
+            background-color: #FFFFFF!important;
+            color: #2E5C99!important;
+            border: 1px solid #2E5C99!important;
+            box-shadow: none!important;
+            outline: 2px solid #2671D3!important;
+            outline-offset: 2px;
+        }
+        
+        button[type=submit][value=snooze-enrollment]:hover {
+            background-color: #2671D3!important;
+            color: #FFFFFF!important;
+            border: 1px solid #2671D3!important;
+        }
+        
+        button[type=submit][value=refuse-add-device] {
+            color: #2E5C99;
+            font-weight: 400!important;
+            padding: 0 0 4px!important;
+            border-radius: 0!important;
+            border-bottom: 1px solid #2E5C99;
+        }
+        
+        button[type=submit][value=refuse-add-device]:focus {
+            background-color: #FFFFFF!important;
+            color: #2E5C99!important;
+            outline: 2px solid #2671D3!important;
+            outline-offset: 2px;
+        }
+        
+        button[type=submit][value=refuse-add-device]:hover {
+            background-color: #FFFFFF!important;
+            color: #2671D3!important;
+            border-bottom: 1px solid #2671D3;
+        }
+        
+        {% endif %}
+
+        {% if prompt.screen.name=='mfa-webauthn-enrollment-success' %}
+
+        .passkey-challenge-button,
+        .webauthn-enrollment-button {
+            cursor: default!important;
         }
 
         {% endif %}
@@ -541,23 +766,36 @@
         button[type=submit][value=back-action] {
             background-color: transparent!important;
             color: #2E5C99!important;
-            border-bottom-width: 0!important;
+            border: 2px solid transparent!important;
             margin-bottom: 0!important;
         }
-
-        button[type=submit][value=back-action]:hover,
+        
         button[type=submit][value=back-action]:focus,
         button[type=submit][value=back-action]:focus-within {
+            background-color: transparent!important;
+            color: #2E5C99!important;
+            border: 2px solid #2671D3!important;
+            box-shadow: none!important;
+            outline: 0 solid #2671D3!important;
+            outline-offset: 0!important;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+        
+        button[type=submit][value=back-action]:hover {
             background-color: #EAEFF5!important;
             color: #2E5C99!important;
+            border: 2px solid #EAEFF5!important;
             box-shadow: none!important;
             outline: 0 solid #2671D3!important;
             outline-offset: 0!important;
         }
-
+        
         button[type=submit][value=back-action] span,
         button[type=submit][value=back-action] span:hover {
             background: #2E5C99!important;
+            left: 52px!important;
         }
     </style>
 </head>
