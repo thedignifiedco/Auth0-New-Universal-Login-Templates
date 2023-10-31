@@ -240,16 +240,19 @@
         .password:has(> input:focus),
         .password:has(> input:focus-within) {
             border-color: #2671D3!important;
+            box-shadow: none!important;
         }
         
         input:invalid + div[data-dynamic-label-for=password-reset],
         input:invalid + div[data-dynamic-label-for=re-enter-password] {
-            color: #CC0066!important
+            color: #CC0066!important;
+            box-shadow: none!important;
         }
         
         input:focus-within + div[data-dynamic-label-for=password-reset],
         input:focus-within + div[data-dynamic-label-for=re-enter-password] {
-            color: #2671D3!important
+            color: #2671D3!important;
+            box-shadow: none!important;
         }
         
         .password:focus-within:has(> .ulp-button-icon:focus) {
