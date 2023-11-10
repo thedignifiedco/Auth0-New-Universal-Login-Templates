@@ -30,13 +30,21 @@
         }
 
         .container {
+            display: flex;
             width: 1024px;
             margin: 0 auto;
+            align-items: start;
         }
 
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 1024px) {
             .container {
-                width: 100%;
+                width: calc(100% - 10%);
+            }
+        }
+
+        @media only screen and (max-width: 780px) {
+            .container {
+                display: block;
             }
         }
 
@@ -63,7 +71,7 @@
             margin-bottom: 60px;
         }
 
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 780px) {
             .login-header {
                 margin-bottom: 30px;
             }
@@ -152,26 +160,27 @@
             margin-bottom: 24px;
         }
 
-        @media only screen and (max-width: 768px) {
+        @media only screen and (max-width: 780px) {
             .login-wrapper,
-            .signup-wrapper {
+            .signup-wrapper,
+            .login-wrapper .login,
+            .login-wrapper .login section {
                 width: 100%;
             }
 
-            .login-wrapper {
-                border-bottom: 1px solid #EEEEEE;
+            .signup-wrapper {
+                padding: 0 4px 20px!important;
             }
-            
+
             .signup-cta {
                 max-width: 100%;
-                box-shadow: none;
             }
         }
 
         @media only screen and (max-width: 600px) {
-            .login-wrapper div header + div {
-                    padding: 0 4px!important;
-                }
+            .signup-wrapper {
+                padding: 0 var(--spacing-5) calc(var(--button-height) + var(--spacing-5))!important;
+            }
         }
 
         form .input-wrapper {
@@ -283,30 +292,72 @@
         
         {% if prompt.name=='resetPasswordSuccess' or prompt.name=='resetPasswordError' %}
 
-        a {
-            color: #FFFFFF!important;
-            padding-bottom: 0!important;
-            border-bottom: 0;
+        section>div>div>section>div a[href="/login"] {
+            width: auto!important;
+            color: #2E5C99!important;
+        }
+
+        section>div>div>section>div a[href="/login"]:hover {
+            color: #2671D3!important;
+        }
+
+        section>div>div>section>div a[href="/login"]:focus {
+            box-shadow: none!important;
         }
 
         section>div>div>section>div {
+            background-color: transparent!important;
             transition: none!important;
         }
 
-        section>div>div>section>div:hover,
-        section>div>div>section>div:focus {
-            background-color: #2671D3!important;
-            color: #FFFFFF;
-            transition: none!important;
-        }
-
-        section>div>div>section>div:focus {
-            background-color: #2E5C99;
+        section>div>div>section>div:hover {
+            background-color: transparent!important;
             box-shadow: none!important;
+            transition: none!important;
+        }
+
+        {% endif %}
+        
+        {% if prompt.screen.name=='reset-password-email' %}
+
+        button[type=submit][value=resend-email-action] {
+            background: #FFFFFF!important;
+            color: #2671D3!important;
+            border: 1px solid #2671D3!important;
+        }
+
+        button[type=submit][value=resend-email-action]:focus {
+            color: #2671D3!important;
+        }
+
+        button[type=submit][value=resend-email-action]:hover {
+            color: #FFFFFF!important;
+        }
+
+        button[type=submit][name=action][value=back-action] {
+            background-color: transparent!important;
+            color: #2E5C99!important;
+            font-weight: 400!important;
+            padding: 0 0 4px!important;
+            border: 0!important;
+            border-radius: 0!important;
+            border-bottom: 1px solid #2E5C99!important;
+        }
+
+        button[type=submit][name=action][value=back-action]:focus {
+            background-color: transparent!important;
+            color: #2E5C99!important;
             outline: 2px solid #2671D3!important;
             outline-offset: 2px;
         }
-
+        
+        button[type=submit][name=action][value=back-action]:hover {
+            background-color: transparent!important;
+            color: #2671D3!important;
+            border: 0!important;
+            border-bottom: 1px solid #2671D3!important;
+        }
+        
         {% endif %}
 
         {% if prompt.name=='mfa' %}
@@ -631,6 +682,41 @@
             filter: none!important;
         }
 
+        button[type=submit][value=back-action] {
+            background-color: transparent!important;
+            color: #2E5C99!important;
+            border: 2px solid transparent!important;
+            margin-bottom: 0!important;
+        }
+
+        button[type=submit][value=back-action]:focus,
+        button[type=submit][value=back-action]:focus-within {
+            background-color: transparent!important;
+            color: #2E5C99!important;
+            border: 2px solid #2671D3!important;
+            outline: 0 solid #2671D3!important;
+            outline-offset: 0!important;
+            box-shadow: none!important;
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+        }
+
+        button[type=submit][value=back-action]:hover {
+            background-color: #EAEFF5!important;
+            color: #2E5C99!important;
+            border: 2px solid #EAEFF5!important;
+            outline: 0 solid #2671D3!important;
+            outline-offset: 0!important;
+            box-shadow: none!important;
+        }
+
+        button[type=submit][value=back-action] span,
+        button[type=submit][value=back-action] span:hover {
+            background: #2E5C99!important;
+            left: 52px!important;
+        }
+
         {% endif %}
         
         {% if prompt.screen.name=='mfa-country-codes' %}
@@ -765,41 +851,6 @@
         }
 
         {% endif %}
-
-        button[type=submit][value=back-action] {
-            background-color: transparent!important;
-            color: #2E5C99!important;
-            border: 2px solid transparent!important;
-            margin-bottom: 0!important;
-        }
-        
-        button[type=submit][value=back-action]:focus,
-        button[type=submit][value=back-action]:focus-within {
-            background-color: transparent!important;
-            color: #2E5C99!important;
-            border: 2px solid #2671D3!important;
-            box-shadow: none!important;
-            outline: 0 solid #2671D3!important;
-            outline-offset: 0!important;
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-        }
-        
-        button[type=submit][value=back-action]:hover {
-            background-color: #EAEFF5!important;
-            color: #2E5C99!important;
-            border: 2px solid #EAEFF5!important;
-            box-shadow: none!important;
-            outline: 0 solid #2671D3!important;
-            outline-offset: 0!important;
-        }
-        
-        button[type=submit][value=back-action] span,
-        button[type=submit][value=back-action] span:hover {
-            background: #2E5C99!important;
-            left: 52px!important;
-        }
     </style>
 </head>
 
