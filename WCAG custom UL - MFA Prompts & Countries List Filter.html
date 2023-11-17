@@ -869,7 +869,9 @@
         $(document).ready(function () {
             $("form[data-form-primary='true']").attr('novalidate', '');
         });
-
+    </script>
+    {% if prompt.screen.name == 'login' %}
+    <script type='text/javascript'>
         // Clone Signup Link for Login page
         let signupLink = document.querySelector('._alternate-action a');
         let clonedSignupLink = signupLink.cloneNode(true);
@@ -877,6 +879,7 @@
         let signupText = document.querySelector('#cta-text')
         signupText.insertAdjacentElement("afterend", clonedSignupLink);
     </script>
+    {% endif %}
     {% if prompt.screen.name == 'mfa-country-codes' %}
     <script type='text/javascript'>
         // Add text filter to country list screen
@@ -889,9 +892,13 @@
         countryFilter.setAttribute('id', 'countryFilter');
         countryFilter.setAttribute('class', 'input inputfilter');
         countryFilter.setAttribute('onkeyup', 'updateList(li)');
+        countryFilter.setAttribute('role', 'combobox');
+        countryFilter.setAttribute('aria-expanded', 'false');
+        countryFilter.setAttribute('aria-autocomplete', 'list');
         countryFilter.setAttribute('placeholder', 'Type a Country Name');
         countryFilter.setAttribute('title', 'Type a Country Name');
         countryFilterLabel.after(countryFilter);
+        ul.setAttribute('role', 'listbox');
         
         function updateList(li) {
             var filter, a, i, txtValue;
