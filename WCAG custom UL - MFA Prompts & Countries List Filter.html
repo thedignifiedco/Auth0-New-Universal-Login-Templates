@@ -3,6 +3,7 @@
 
 <head>
     {%- auth0:head -%}
+    <title>{{ prompt.screen.texts.pageTitle }}</title>
     <style>
         body {
             background-color: #FFFFFF;
@@ -403,6 +404,8 @@
         label[for=voice]:focus {
             background-color: #FFFFFF!important;
             color: #2E5C99!important;
+            outline: 2px solid #2671D3!important;
+            outline-offset: 2px;
             box-shadow: none!important;
         }
         
@@ -416,45 +419,58 @@
 
         {% endif %}
 
-        button[type=submit],
-        button[value=re-send-email] {
+        /* Global Buttons */
+        button[type=submit] {
             font-size: 16px!important;
             font-weight: 400!important;
+            border: 1px solid #2E5C99!important;
             border-radius: 2px!important;
             transition: none!important;
         }
-        
-        button[type=submit]:focus {
-            background-color: #2E5C99;
-            color: #FFFFFF!important;
+
+        button[type=submit]:focus,
+        button[type=button]:focus,
+        button[data-action-button-secondary=true]:focus {
             box-shadow: none!important;
             outline: 2px solid #2671D3!important;
-            outline-offset: 2px;
+            outline-offset: 2px!important;
         }
-        
+
         button[type=submit]:hover,
         button[type=submit]:focus button[data-action-button-secondary=true]:hover,
         button[type=button]:hover {
             background-color: #2671D3!important;
             color: #FFFFFF!important;
+            border: 1px solid #2671D3!important;
+            box-shadow: none!important;
+        }
+        
+        /* Primary Buttons */
+        button[type=submit],
+        button[value=re-send-email] {
+            background: #2E5C99!important;
+            color: #FFFFFF!important;
         }
 
+        /* Secondary Buttons */
         button[type=button],
         button[data-action-button-secondary=true],
-        button[value=decline],
-        button[value=cancel],
-        button[type=submit][value=otpCodeAction] {
+        button[type=submit][value=decline],
+        button[type=submit][value=cancel],
+        button[type=submit][value=otpCodeAction],
+        button[type=submit][value=snooze-enrollment],
+        button[type=submit]._link-selection-action {
             background: #FFFFFF!important;
-            color: #2671D3;
-            border: 1px solid #2671D3;
-            transition: none!important;
+            color: #2E5C99!important;
         }
 
-        button[type=button]:focus,
-        button[data-action-button-secondary=true]:focus {
-            box-shadow: none!important;
-            outline: 2px solid #2671D3!important;
-            outline-offset: 2px;
+        button[type=submit][value=decline]:hover,
+        button[type=submit][value=cancel]:hover,
+        button[type=submit][value=otpCodeAction]:hover,
+        button[type=submit][value=snooze-enrollment]:hover,
+        button[type=submit]._link-selection-action:hover {
+            background-color: #2671D3!important;
+            color: #FFFFFF!important;
         }
 
         button[type=button][data-action=toggle] {
@@ -484,49 +500,53 @@
             background-color: #2E5C99!important;
         }
 
-        button[value=re-send-email] {
-            background-color: #2E5C99!important;
-            color: #FFFFFF!important;
-            border-radius: 2px!important;
-        }
-
+        /* Text Buttons */
+        button[type=submit][value=back-to-login],
         button[type=submit][value=resend-code],
         button[type=submit][value=resend-sms],
         button[type=submit][value=resend-sms-sms],
         button[type=submit][value=resend-voice],
         button[type=submit][value=toggle-view],
         button[type=submit][value=pick-authenticator],
-        button[type=submit][value=pick-authenticators] {
+        button[type=submit][value=pick-authenticators],
+        button[type=submit][value=refuse-add-device] {
+            background-color: #FFFFFF!important;
             color: #2E5C99!important;
             font-weight: 400!important;
             padding: 0 0 4px!important;
             border-radius: 0!important;
-            border-bottom: 1px solid #2671D3;
+            border: 0!important;
+            border-bottom: 1px solid #2E5C99!important;
         }
         
+        button[type=submit][value=back-to-login]:focus,
         button[type=submit][value=resend-code]:focus,
         button[type=submit][value=resend-sms]:focus,
         button[type=submit][value=resend-sms-sms]:focus,
-        button[type=submit][value=resend-voice]:focus,
-        button[type=submit][value=otpCodeAction]:focus,
+        button[type=submit][value=resend-voice]:focus
         button[type=submit][value=toggle-view]:focus,
         button[type=submit][value=pick-authenticator]:focus,
-        button[type=submit][value=pick-authenticators]:focus {
+        button[type=submit][value=pick-authenticators]:focus,
+        button[type=submit][value=refuse-add-device]:focus {
             background-color: #FFFFFF!important;
             color: #2E5C99!important;
             outline: 2px solid #2671D3!important;
             outline-offset: 2px;
         }
         
+        button[type=submit][value=back-to-login]:hover,
         button[type=submit][value=resend-code]:hover,
         button[type=submit][value=resend-sms]:hover,
         button[type=submit][value=resend-sms-sms]:hover,
         button[type=submit][value=resend-voice]:hover,
         button[type=submit][value=toggle-view]:hover,
         button[type=submit][value=pick-authenticator]:hover,
-        button[type=submit][value=pick-authenticators]:hover {
+        button[type=submit][value=pick-authenticators]:hover,
+        button[type=submit][value=refuse-add-device]:hover {
             background-color: #FFFFFF!important;
             color: #2671D3!important;
+            border: 0!important;
+            border-bottom: 1px solid #2671D3!important;
         }
 
         {% if prompt.screen.name=='mfa-login-options' or prompt.screen.name=='mfa-begin-enroll-options' %}
@@ -542,9 +562,6 @@
             background-color: #FFFFFF!important;
             color: #2E5C99!important;
             border: 1px solid #2E5C99!important;
-            box-shadow: none!important;
-            outline: 2px solid #2671D3!important;
-            outline-offset: 2px;
         }
         
         button[type=submit]:hover {
@@ -582,19 +599,9 @@
 
         {% if prompt.screen.name=='mfa-recovery-code-enrollment' or prompt.screen.name=='mfa-otp-enrollment-code' %}
 
-        button[type=button]:focus {
-            background-color: #FFFFFF!important;
-            color: #2E5C99!important;
+        button[type=button] {
             border: 1px solid #2E5C99!important;
-            box-shadow: none!important;
-            outline: 2px solid #2671D3!important;
-            outline-offset: 2px;
-        }
-        
-        button[type=button]:hover {
-            background-color: #2671D3!important;
-            color: #FFFFFF!important;
-            border: 1px solid #2671D3!important;
+            transition: none!important;
         }
         
         input[type=checkbox]:focus+label[for=saved] {
@@ -725,9 +732,17 @@
             overflow: hidden!important;
             padding: 20px 40px!important;
         }
+
+        label {
+            display: block;
+            color: #000000;
+            line-height: 24px;
+            text-align: left;
+            margin-bottom: 8px;
+        }
         
         .input {
-            border-radius: 2px!important;
+            border-radius: 8px!important;
             margin-top: 0!important;
         }
         
@@ -745,13 +760,14 @@
         }
         
         .input + ul {
-            height: 360px!important;
+            height: 330px!important;
             overflow-y: scroll;
             padding: 6px!important;
             margin-top: 10px!important;
         }
         
         button[type=submit]._link-selection-action {
+            border: 1px solid transparent!important;
             outline: 2px solid transparent!important;
             outline-offset: 2px;
         }
@@ -799,9 +815,6 @@
         {% if prompt.screen.name=='mfa-webauthn-platform-enrollment' %}
 
         button[type=submit][value=snooze-enrollment] {
-            background: #FFFFFF!important;
-            color: #2E5C99!important;
-            border: 1px solid #2E5C99!important;
             margin-bottom: 16px!important;
         }
         
@@ -809,36 +822,6 @@
             background-color: #FFFFFF!important;
             color: #2E5C99!important;
             border: 1px solid #2E5C99!important;
-            box-shadow: none!important;
-            outline: 2px solid #2671D3!important;
-            outline-offset: 2px;
-        }
-        
-        button[type=submit][value=snooze-enrollment]:hover {
-            background-color: #2671D3!important;
-            color: #FFFFFF!important;
-            border: 1px solid #2671D3!important;
-        }
-        
-        button[type=submit][value=refuse-add-device] {
-            color: #2E5C99;
-            font-weight: 400!important;
-            padding: 0 0 4px!important;
-            border-radius: 0!important;
-            border-bottom: 1px solid #2E5C99;
-        }
-        
-        button[type=submit][value=refuse-add-device]:focus {
-            background-color: #FFFFFF!important;
-            color: #2E5C99!important;
-            outline: 2px solid #2671D3!important;
-            outline-offset: 2px;
-        }
-        
-        button[type=submit][value=refuse-add-device]:hover {
-            background-color: #FFFFFF!important;
-            color: #2671D3!important;
-            border-bottom: 1px solid #2671D3;
         }
         
         {% endif %}
@@ -897,7 +880,32 @@
     {% if prompt.screen.name == 'mfa-country-codes' %}
     <script type='text/javascript'>
         // Add text filter to country list screen
-        const ul = document.getElementsByTagName('ul')[0]; const li = ul.getElementsByTagName('li'); const countryFilter = document.createElement('input'); countryFilter.setAttribute('id', 'countryFilter'); countryFilter.setAttribute('class', 'input inputfilter'); countryFilter.setAttribute('onkeyup', 'updateList(li)'); countryFilter.setAttribute('placeholder', 'Start typing a country name...'); countryFilter.setAttribute('title', 'Enter a Country'); ul.before(countryFilter); function updateList(li) { var filter, a, i, txtValue; filter = countryFilter.value.toUpperCase(); for (i = 0; i < li.length; i++) { a = li[i].getElementsByTagName('form')[0].getElementsByTagName('button')[0].getElementsByTagName('span')[1]; txtValue = a.textContent || a.innerText; if (txtValue.toUpperCase().indexOf(filter) > -1) { li[i].style.display = ''; } else { li[i].style.display = 'none'; } } }
+        const ul = document.getElementsByTagName('ul')[0];
+        const li = ul.getElementsByTagName('li');
+        const countryFilterLabel = document.createElement('label');
+        countryFilterLabel.innerHTML = "Filter list of Country Codes";
+        ul.before(countryFilterLabel);
+        const countryFilter = document.createElement('input');
+        countryFilter.setAttribute('id', 'countryFilter');
+        countryFilter.setAttribute('class', 'input inputfilter');
+        countryFilter.setAttribute('onkeyup', 'updateList(li)');
+        countryFilter.setAttribute('placeholder', 'Type a Country Name');
+        countryFilter.setAttribute('title', 'Type a Country Name');
+        countryFilterLabel.after(countryFilter);
+        
+        function updateList(li) {
+            var filter, a, i, txtValue;
+            filter = countryFilter.value.toUpperCase();
+            for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName('form')[0].getElementsByTagName('button')[0].getElementsByTagName('span')[1];
+                txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = '';
+                } else {
+                    li[i].style.display = 'none';
+                }
+            }
+        }
     </script>
     {% endif %}
 </body>
