@@ -201,7 +201,6 @@
         form input,
         form .password {
             border-radius: 8px!important;
-            border: 1px solid #CCC!important;
         }
 
         form input[name=password],
@@ -211,7 +210,8 @@
         }
 
         .ulp-input-error-icon,
-        [id^=ulp-container-] .ulp-field.ulp-error .ulp-error-info:before {
+        [id^=ulp-container-] .ulp-field.ulp-error .ulp-error-info:before,
+        .no-arrow > div > ul > li > div > span:before {
             display: flex;
             height: 24px!important;
             width: 24px!important;
@@ -219,6 +219,7 @@
             background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAcAAAAfCAIAAACktUByAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAxklEQVQoz+2RoYoCYRhFz/wIwzC7YBEN02yG2b5ms2/hC2j1BQTjPojZIC6zzTImgzaLWsRxkEH574ZftBhsFk/6OFwufFxPEnD8WwEfzToOSVmynNGZ0cmSpSRJBtj9TFzidhge8bavsEg6bw9prZfWeuftwe3muY0vuwwoVT5d9Gqf6i0BNi/2oxQot79M6F/t4ntwmq+BII4aaR+ssXnhFHCar21egDEm9IM4cjaII9fgSbJ5sRmOgWq3ZUIffpnev7nzD83ZZhXEDe4mAAAAAElFTkSuQmCC);
             background-size: 4px;
             background-position: center;
+            background-repeat: no-repeat;
         }
         
         .ulp-input-error-message,
@@ -236,37 +237,21 @@
         .input:-webkit-autofill {
             border-color: #2671D3!important;
         }
+
+        .password button.ulp-button-icon:hover {
+            border-width: 0!important;
+        }
         
-        {% if prompt.name=='reset-password' %}
+        {% if prompt.screen.name=='reset-password' or prompt.screen.name=='signup' %}
         
-        .password:has(> input:invalid) {
+        .password [id^=ulp-container-] .ulp-field.ulp-error {
             border-color: #CC0066!important;
         }
-        
-        .password:has(> input:valid) {
-            border-color: #CCCCCC!important;
-        }
-        
-        .password:has(> input:focus),
-        .password:has(> input:focus-within) {
-            border-color: #2671D3!important;
-            box-shadow: none!important;
-        }
-        
-        input:invalid + div[data-dynamic-label-for=password-reset],
-        input:invalid + div[data-dynamic-label-for=re-enter-password] {
-            color: #CC0066!important;
-            box-shadow: none!important;
-        }
-        
-        input:focus-within + div[data-dynamic-label-for=password-reset],
-        input:focus-within + div[data-dynamic-label-for=re-enter-password] {
-            color: #2671D3!important;
-            box-shadow: none!important;
-        }
-        
-        .password:focus-within:has(> .ulp-button-icon:focus) {
-            box-shadow: none!important;
+
+        .no-arrow {
+            color: #CC0066;
+            margin-top: -16px!important;
+            padding: 8px;
         }
         
         {% endif %}
