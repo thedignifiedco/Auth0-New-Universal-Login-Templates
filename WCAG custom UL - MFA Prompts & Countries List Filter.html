@@ -864,6 +864,27 @@
         signupText.insertAdjacentElement("afterend", clonedSignupLink);
     </script>
     {% endif %}
+    {% if prompt.screen.name=='reset-password' or prompt.screen.name=='signup' %}
+    <script type='text/javascript'>
+        // Get all list items within the specified UL element
+        const listItems = document.querySelectorAll('li');
+
+        // Iterate through each list item
+        listItems.forEach((item) => {
+        // Find the child span element within the current list item
+        const spanElement = item.querySelector('span');
+
+        // Check if the span element is found
+        if (spanElement) {
+            // Get the text content of the span element
+            const labelText = spanElement.textContent.trim();
+
+            // Set the aria-label attribute with the text content
+            item.setAttribute('aria-label', labelText);
+        }
+        });
+    </script>
+    {% endif %}
     {% if prompt.screen.name == 'mfa-country-codes' %}
     <script type='text/javascript'>
         // Add text filter to country list screen
