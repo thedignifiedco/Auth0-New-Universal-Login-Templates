@@ -866,6 +866,18 @@
     {% endif %}
     {% if prompt.screen.name=='reset-password' or prompt.screen.name=='signup' %}
     <script type='text/javascript'>
+        // Get the element with id "error-element-re-enter-password"
+        const errorElement = document.getElementById('error-element-re-enter-password');
+        
+        // Check if the element exists and if the data-error-code attribute is "no-password"
+        if (errorElement && errorElement.getAttribute('data-error-code') === 'no-password') {
+        // Correct the data-error-code attribute to "no-re-enter-password"
+        errorElement.setAttribute('data-error-code', 'no-re-enter-password');
+
+        // Change the inner HTML of the span element
+        errorElement.innerHTML = '<span class="ulp-input-error-icon" role="img" aria-label="Error"></span> New password confirmation is missing';
+        }
+
         // Get all list items within the specified UL element
         const listItems = document.querySelectorAll('li');
 
