@@ -249,7 +249,6 @@
         }
 
         .no-arrow {
-            color: #CC0066;
             margin-top: -16px!important;
         }
         
@@ -871,30 +870,39 @@
         
         // Check if the element exists and if the data-error-code attribute is "no-password"
         if (errorElement && errorElement.getAttribute('data-error-code') === 'no-password') {
-        // Correct the data-error-code attribute to "no-re-enter-password"
-        errorElement.setAttribute('data-error-code', 'no-re-enter-password');
+            // Correct the data-error-code attribute to "no-re-enter-password"
+            errorElement.setAttribute('data-error-code', 'no-re-enter-password');
 
-        // Change the inner HTML of the span element
-        errorElement.innerHTML = '<span class="ulp-input-error-icon" role="img" aria-label="Error"></span> New password confirmation is missing';
+            // Change the inner HTML of the span element
+            errorElement.innerHTML = '<span class="ulp-input-error-icon" role="img" aria-label="Error"></span> New password confirmation is missing';
         }
 
-        // Get all list items within the specified UL element
-        const listItems = document.querySelectorAll('li');
+        // Get the 'no-arrow' div element
+        const noArrowDiv = document.querySelector('.no-arrow');
 
-        // Iterate through each list item
-        listItems.forEach((item) => {
-        // Find the child span element within the current list item
-        const spanElement = item.querySelector('span');
+        // Add role="alert" attribute
+        noArrowDiv.setAttribute('role', 'alert');
 
-        // Check if the span element is found
-        if (spanElement) {
-            // Get the text content of the span element
-            const labelText = spanElement.textContent.trim();
+        // Change aria-live attribute's value to "polite"
+        noArrowDiv.setAttribute('aria-live', 'polite');
 
-            // Set the aria-label attribute with the text content
-            item.setAttribute('aria-label', labelText);
-        }
-        });
+        // // Get all list items within the specified UL element
+        // const listItems = document.querySelectorAll('li');
+
+        // // Iterate through each list item
+        // listItems.forEach((item) => {
+        // // Find the child span element within the current list item
+        // const spanElement = item.querySelector('span');
+
+        // // Check if the span element is found
+        // if (spanElement) {
+        //     // Get the text content of the span element
+        //     const labelText = spanElement.textContent.trim();
+
+        //     // Set the aria-label attribute with the text content
+        //     item.setAttribute('aria-label', labelText);
+        // }
+        // });
     </script>
     {% endif %}
     {% if prompt.screen.name == 'mfa-country-codes' %}
