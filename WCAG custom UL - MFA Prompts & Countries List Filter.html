@@ -665,6 +665,10 @@
         
         {% if prompt.screen.name=='mfa-country-codes' or prompt.screen.name=='mfa-login-options' or prompt.screen.name=='mfa-begin-enroll-options' %}
 
+        section header h1 {
+            font-size: 0.8em!important;
+        }
+
         section header>div>div:hover,
         section header>div>div:focus,
         section header>div>div:focus-within {
@@ -704,16 +708,15 @@
         button[type=submit][value=back-action] span,
         button[type=submit][value=back-action] span:hover {
             background: #2E5C99!important;
-            left: 52px!important;
+            left: 30px!important;
         }
 
         {% endif %}
         
         {% if prompt.screen.name=='mfa-country-codes' %}
         header + div {
-            height: 480px!important;
-            overflow: hidden!important;
-            padding: 20px 40px!important;
+            padding: 0px 10px 0 0!important;
+            margin: 40px!important;
         }
 
         label {
@@ -885,41 +888,6 @@
 
         // Change aria-live attribute's value to "polite"
         noArrowDiv.setAttribute('aria-live', 'polite');
-    </script>
-    {% endif %}
-    {% if prompt.screen.name == 'mfa-country-codes' %}
-    <script type='text/javascript'>
-        // Add text filter to country list screen
-        const ul = document.getElementsByTagName('ul')[0];
-        const li = ul.getElementsByTagName('li');
-        const countryFilterLabel = document.createElement('label');
-        countryFilterLabel.innerHTML = "Filter list of Country Codes";
-        ul.before(countryFilterLabel);
-        const countryFilter = document.createElement('input');
-        countryFilter.setAttribute('id', 'countryFilter');
-        countryFilter.setAttribute('class', 'input inputfilter');
-        countryFilter.setAttribute('onkeyup', 'updateList(li)');
-        countryFilter.setAttribute('role', 'combobox');
-        countryFilter.setAttribute('aria-expanded', 'false');
-        countryFilter.setAttribute('aria-autocomplete', 'list');
-        countryFilter.setAttribute('placeholder', 'Type a Country Name');
-        countryFilter.setAttribute('title', 'Type a Country Name');
-        countryFilterLabel.after(countryFilter);
-        ul.setAttribute('role', 'listbox');
-        
-        function updateList(li) {
-            var filter, a, i, txtValue;
-            filter = countryFilter.value.toUpperCase();
-            for (i = 0; i < li.length; i++) {
-                a = li[i].getElementsByTagName('form')[0].getElementsByTagName('button')[0].getElementsByTagName('span')[1];
-                txtValue = a.textContent || a.innerText;
-                if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    li[i].style.display = '';
-                } else {
-                    li[i].style.display = 'none';
-                }
-            }
-        }
     </script>
     {% endif %}
 </body>
