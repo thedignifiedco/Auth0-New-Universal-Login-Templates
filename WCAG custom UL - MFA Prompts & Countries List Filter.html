@@ -851,6 +851,24 @@
         $(document).ready(function () {
             $("form[data-form-primary='true']").attr('novalidate', '');
         });
+
+        // Function to add tabindex="0" to all button and a elements
+        function addTabIndex() {
+            // Select all button elements and add tabindex="0"
+            var buttons = document.querySelectorAll('button');
+            buttons.forEach(function(button) {
+                button.setAttribute('tabindex', '0');
+            });
+
+            // Select all anchor (a) elements and add tabindex="0"
+            var links = document.querySelectorAll('a');
+            links.forEach(function(link) {
+                link.setAttribute('tabindex', '0');
+            });
+        }
+
+        // Call the function when the page is fully loaded
+        document.addEventListener('DOMContentLoaded', addTabIndex);
     </script>
     {% if prompt.screen.name == 'login' %}
     <script type='text/javascript'>
