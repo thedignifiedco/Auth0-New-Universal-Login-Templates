@@ -104,7 +104,7 @@
 
         .login-wrapper .login {
             display: block;
-            height: 305px;
+            /* height: 305px; */
             min-height: 305px;
             justify-items: start;
             padding: 0!important;
@@ -241,7 +241,41 @@
         .password button.ulp-button-icon:hover {
             border-width: 0!important;
         }
-        
+
+        .ulp-captcha-container {
+            display: inline-block;
+        }
+
+        .ulp-hcaptcha {
+            transform: unset;
+            top: 0;
+            margin-left: 1px;
+            height: 76px;
+            border-radius: 4px;
+        }
+
+        @media (min-width: 381px) and (max-width: 500px) {
+            .ulp-captcha-container {
+                display: block;
+            }
+
+            .ulp-hcaptcha {
+                transform: scale(0.95);
+            }
+        }
+
+        @media (max-width: 380px) {
+            .ulp-captcha-container {
+                display: block;
+            }
+
+            .ulp-hcaptcha {
+                transform: scale(0.85);
+                max-width: 100%;
+                height: 72px;
+            }
+        }
+
         {% if prompt.screen.name=='reset-password' or prompt.screen.name=='signup' %}
         
         .password [id^=ulp-container-] .ulp-field.ulp-error {
@@ -869,6 +903,44 @@
 
         // Call the function when the page is fully loaded
         document.addEventListener('DOMContentLoaded', addTabIndex);
+
+        // Function to check the border color of .ulp-captcha-container
+        function isBorderColorValid() {
+            // Get the .ulp-captcha-container element
+            var ulpCaptchaContainer = document.querySelector('.ulp-captcha-container');
+
+            // Get the computed style of the element
+            var computedStyle = window.getComputedStyle(ulpCaptchaContainer);
+
+            // Get the border color
+            var borderColor = computedStyle.getPropertyValue('border-color');
+
+            // Check if the border color is #cc0066
+            return borderColor === 'rgb(204, 0, 102)' || borderColor === '#cc0066';
+        }
+
+        // Function to add error message after .ulp-captcha-container if the border color is not valid
+        function addErrorMessage() {
+            if (isBorderColorValid()) {
+                // Create the error message element
+                var errorMessage = document.createElement('span');
+                errorMessage.id = 'error-element-captcha';
+                errorMessage.className = 'ulp-input-error-message';
+                errorMessage.setAttribute('data-error-code', 'no-captcha');
+                errorMessage.setAttribute('role', 'alert');
+                errorMessage.setAttribute('aria-live', 'polite');
+                errorMessage.innerHTML = '<span class="ulp-input-error-icon" role="img" aria-label="Error"></span> Verify you are human.';
+
+                // Get the .ulp-captcha-container element
+                var ulpCaptchaContainer = document.querySelector('.ulp-captcha-container');
+
+                // Insert the error message after the .ulp-captcha-container element
+                ulpCaptchaContainer.parentNode.insertBefore(errorMessage, ulpCaptchaContainer.nextSibling);
+            }
+        }
+
+        // Call the function to add the error message
+        addErrorMessage();
     </script>
     {% if prompt.screen.name == 'login' %}
     <script type='text/javascript'>
